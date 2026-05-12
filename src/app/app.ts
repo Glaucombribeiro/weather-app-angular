@@ -11,9 +11,12 @@ import { WeatherService } from './services/weather';
   styleUrl: './app.scss',
 })
 export class AppComponent {
+  private readonly storageKey = 'weather-app-cards';
   weatherCards = signal<any[]>([]);
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService) {
+    this.weatherCards.set(this.loadStoredCards());
+  }
 
   searchCity(city: string) {
     this.weatherService.getWeather(city).subscribe({
@@ -24,7 +27,10 @@ export class AppComponent {
             (card) => this.normalizeCityName(card.name) === cityName,
           );
 
-          return cityAlreadyExists ? cards : [response, ...cards];
+          const updatedCards = cityAlreadyExists ? cards : [response, ...cards];
+          this.storeCards(updatedCards);
+
+          return updatedCards;
         });
         console.log('Dados recebidos:', response);
       },
@@ -36,7 +42,30 @@ export class AppComponent {
   }
 
   removeWeatherCard(cityId: number) {
-    this.weatherCards.update((cards) => cards.filter((card) => card.id !== cityId));
+    this.weatherCards.update((cards) => {
+      const updatedCards = cards.filter((card) => card.id !== cityId);
+      this.storeCards(updatedCards);
+
+      return updatedCards;
+    });
+  }
+
+  private loadStoredCards() {
+    try {
+      const storedCards = localStorage.getItem(this.storageKey);
+
+      return storedCards ? JSON.parse(storedCards) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private storeCards(cards: any[]) {
+    try {
+      localStorage.setItem(this.storageKey, JSON.stringify(cards));
+    } catch {
+      console.warn('Nao foi possivel salvar as cidades no localStorage.');
+    }
   }
 
   private normalizeCityName(city: string) {
