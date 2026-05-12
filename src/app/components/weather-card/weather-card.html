@@ -1,0 +1,5 @@
+<article class="p-8 bg-white/20 backdrop-blur-md rounded-3xl border border-white/30 text-white shadow-2xl">
+  <h2 class="text-3xl font-semibold">{{ weather.name }}</h2>
+  <p class="text-6xl font-bold my-4">{{ weather.main.temp | number:'1.0-0' }}&deg;C</p>
+  <p class="capitalize text-lg">{{ weather.weather[0].description }}</p>
+</article>
