@@ -9,7 +9,7 @@ Aplicação de previsão do tempo desenvolvida para praticar conceitos avançado
 - **OpenWeatherMap API** para dados climáticos
 
 ## 🛠️ Como executar o projeto
-1. Clone o repositório: `git clone https://github.com/SEU_USUARIO/weather-app-angular.git`
+1. Clone o repositório: `git clone https://github.com/Glaucombribeiro/weather-app-angular.git`
 2. Entre na pasta: `cd weather-app-angular`
 3. Instale as dependências: `npm install`
 4. Inicie o servidor: `ng serve`
