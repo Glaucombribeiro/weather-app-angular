@@ -6,19 +6,19 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './search-bar.html',
-  styleUrl: './search-bar.scss'
+  styleUrl: './search-bar.scss',
 })
 export class SearchBarComponent {
-  // Variável que armazena o que o usuário digita
-  cityName: string = '';
+  cityName = '';
 
-  // O "emissor" que vai levar o nome da cidade para o componente pai
   @Output() onSearch = new EventEmitter<string>();
 
   onSubmit() {
-    if (this.cityName.trim()) {
-      this.onSearch.emit(this.cityName); // Dispara o evento
-      this.cityName = ''; // Limpa o input após a busca
+    const city = this.cityName.trim();
+
+    if (city) {
+      this.onSearch.emit(city);
+      this.cityName = '';
     }
   }
 }

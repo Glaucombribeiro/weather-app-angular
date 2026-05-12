@@ -1,32 +1,31 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchBarComponent } from './components/search-bar/search-bar'; // Importe o componente novo
+import { Component, signal } from '@angular/core';
+import { SearchBarComponent } from './components/search-bar/search-bar';
 import { WeatherService } from './services/weather';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, SearchBarComponent], // Adicione o SearchBarComponent aqui
+  imports: [CommonModule, SearchBarComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class AppComponent {
-  // Criamos a variável e dizemos que ela pode ser "any" por enquanto 
-  // (depois usamos aquela Interface/Model que criamos)
-  weatherData: any; 
+  weatherData = signal<any | null>(null);
 
   constructor(private weatherService: WeatherService) {}
 
   searchCity(city: string) {
     this.weatherService.getWeather(city).subscribe({
       next: (response) => {
-        this.weatherData = response; // Aqui os dados da API são salvos
-        console.log('Dados recebidos:', this.weatherData);
+        this.weatherData.set(response);
+        console.log('Dados recebidos:', response);
       },
       error: (err) => {
+        this.weatherData.set(null);
         console.error('Erro ao buscar cidade:', err);
-        alert('Cidade não encontrada!');
-      }
+        alert('Cidade nao encontrada!');
+      },
     });
   }
 }
