@@ -1,5 +1,19 @@
-<article class="weather-card" [class.night]="isNight" [class.day]="!isNight">
+<article class="weather-card" [class.night]="isNight" [class.day]="!isNight" [class.confirming-close]="closeConfirmationVisible">
   <div class="weather-card__sky" aria-hidden="true"></div>
+
+  @if (closeConfirmationVisible) {
+    <div class="weather-card__confirm-actions" aria-label="Confirmar remocao do card">
+      <button class="weather-card__confirm-button weather-card__confirm-button--confirm" type="button" [attr.aria-label]="'Remover card de ' + weather.name" (click)="confirmClose()">
+        <span aria-hidden="true"></span>
+      </button>
+
+      <button class="weather-card__confirm-button weather-card__confirm-button--cancel" type="button" [attr.aria-label]="'Cancelar remocao do card de ' + weather.name" (click)="cancelClose()">
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  } @else {
+    <button class="weather-card__close" type="button" [attr.aria-label]="'Fechar card de ' + weather.name" (click)="requestClose()"></button>
+  }
 
   <div class="weather-card__content">
     <header class="weather-card__header">

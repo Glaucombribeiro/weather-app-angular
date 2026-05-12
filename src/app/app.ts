@@ -35,6 +35,10 @@ export class AppComponent {
     });
   }
 
+  removeWeatherCard(cityId: number) {
+    this.weatherCards.update((cards) => cards.filter((card) => card.id !== cityId));
+  }
+
   private normalizeCityName(city: string) {
     return city
       .normalize('NFD')

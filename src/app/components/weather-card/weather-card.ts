@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-weather-card',
@@ -10,6 +10,8 @@ import { Component, Input } from '@angular/core';
 })
 export class WeatherCardComponent {
   @Input({ required: true }) weather!: any;
+  @Output() close = new EventEmitter<void>();
+  closeConfirmationVisible = false;
 
   get iconCode() {
     return this.weather?.weather?.[0]?.icon ?? '';
@@ -33,5 +35,17 @@ export class WeatherCardComponent {
 
   get windSpeed() {
     return this.weather?.wind?.speed;
+  }
+
+  requestClose() {
+    this.closeConfirmationVisible = true;
+  }
+
+  cancelClose() {
+    this.closeConfirmationVisible = false;
+  }
+
+  confirmClose() {
+    this.close.emit();
   }
 }
