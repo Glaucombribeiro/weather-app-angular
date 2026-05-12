@@ -17,10 +17,16 @@ describe('WeatherCardComponent', () => {
       name: 'Sao Paulo',
       main: {
         temp: 24,
+        feels_like: 25,
+        humidity: 70,
+      },
+      wind: {
+        speed: 3.4,
       },
       weather: [
         {
           description: 'ceu limpo',
+          icon: '01d',
         },
       ],
     };
@@ -29,5 +35,11 @@ describe('WeatherCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should use the day style when the icon is a day icon', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('article')?.classList).toContain('day');
   });
 });

@@ -1,7 +1,7 @@
-<main class="min-h-screen bg-gradient-to-br from-blue-400 to-blue-700 flex flex-col items-center pt-10">
+<main class="min-h-screen bg-[radial-gradient(circle_at_20%_12%,#2563eb_0,#102b78_34%,#071531_72%,#030817_100%)] flex flex-col items-center pt-10">
   <app-search-bar (onSearch)="searchCity($event)"></app-search-bar>
 
-  <div class="mt-10 grid w-full max-w-5xl grid-cols-1 gap-6 px-4 sm:grid-cols-2 lg:grid-cols-3 ">
+  <div class="mt-10 grid w-full max-w-5xl auto-rows-fr grid-cols-1 gap-6 px-4 pb-10 sm:grid-cols-2 lg:grid-cols-3">
     @for (weather of weatherCards(); track weather.id) {
       <app-weather-card [weather]="weather"></app-weather-card>
     }

@@ -1,5 +1,46 @@
-<article class="p-8 bg-white/20 backdrop-blur-md rounded-3xl border border-white/30 text-white shadow-2xl">
-  <h2 class="text-3xl font-semibold">{{ weather.name }}</h2>
-  <p class="text-6xl font-bold my-4">{{ weather.main.temp | number:'1.0-0' }}&deg;C</p>
-  <p class="capitalize text-lg">{{ weather.weather[0].description }}</p>
+<article class="weather-card" [class.night]="isNight" [class.day]="!isNight">
+  <div class="weather-card__sky" aria-hidden="true"></div>
+
+  <div class="weather-card__content">
+    <header class="weather-card__header">
+      <div class="weather-card__title-block">
+      <span class="weather-card__period">{{ periodLabel }}</span>
+        <h2 class="weather-card__city">{{ weather.name }}</h2>
+      </div>
+
+      <div class="weather-card__icon-wrap">
+        @if (iconUrl) {
+          <img class="weather-card__icon" [src]="iconUrl" [alt]="description">
+        }
+      </div>
+    </header>
+
+    <section class="weather-card__weather">
+      <p class="weather-card__temperature">{{ weather.main.temp | number:'1.0-0' }}&deg;</p>
+      <p class="weather-card__description">{{ description }}</p>
+    </section>
+
+    <footer class="weather-card__stats">
+      @if (weather.main.feels_like !== undefined) {
+        <div class="weather-card__stat">
+          <span>Sensacao</span>
+          <strong>{{ weather.main.feels_like | number:'1.0-0' }}&deg;</strong>
+        </div>
+      }
+
+      @if (weather.main.humidity !== undefined) {
+        <div class="weather-card__stat">
+          <span>Umidade</span>
+          <strong>{{ weather.main.humidity }}%</strong>
+        </div>
+      }
+
+      @if (windSpeed !== undefined) {
+        <div class="weather-card__stat">
+          <span>Vento</span>
+          <strong>{{ windSpeed | number:'1.0-1' }} m/s</strong>
+        </div>
+      }
+    </footer>
+  </div>
 </article>
