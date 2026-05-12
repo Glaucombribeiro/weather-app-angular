@@ -1,5 +1,11 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
-</h1>
+<main class="min-h-screen bg-gradient-to-br from-blue-400 to-blue-700 flex flex-col items-center pt-10">
+  
+  <app-search-bar (onSearch)="searchCity($event)"></app-search-bar>
 
-<router-outlet></router-outlet>
+  <div *ngIf="weatherData" class="mt-10 p-8 bg-white/20 backdrop-blur-md rounded-3xl border border-white/30 text-white shadow-2xl">
+    <h2 class="text-3xl font-semibold">{{ weatherData.name }}</h2>
+    <p class="text-6xl font-bold my-4">{{ weatherData.main.temp | number:'1.0-0' }}°C</p>
+    <p class="capitalize text-lg">{{ weatherData.weather[0].description }}</p>
+  </div>
+
+</main>

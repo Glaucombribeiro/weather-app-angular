@@ -1,0 +1,16 @@
+<div class="flex items-center justify-center p-4">
+  <form (ngSubmit)="onSubmit()" class="flex w-full max-w-md bg-white/20 backdrop-blur-md rounded-full px-4 py-2 border border-white/30 shadow-lg">
+    <input 
+      type="text" 
+      [(ngModel)]="cityName" 
+      name="city"
+      placeholder="Search for a city..." 
+      class="bg-transparent border-none focus:ring-0 text-white placeholder-white/70 w-full px-2 outline-none"
+    >
+    <button type="submit" class="text-white hover:scale-110 transition-transform">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+    </button>
+  </form>
+</div>
