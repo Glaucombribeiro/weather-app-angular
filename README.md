@@ -18,7 +18,7 @@ Aplicação de previsão do tempo desenvolvida para praticar conceitos avançado
 ## 📈 Progresso
 - [x] Configuração inicial do projeto
 - [x] Criação do Weather Service
-- [ ] Buscar o clima pelo nome da cidade.
-- [ ] Exibir temperatura, condição climática e ícone correspondente.
-- [ ] Interface dinâmica que diferencia Dia e Noite.
-- [ ] Persistência da última cidade buscada via `localStorage`
+- [x] Buscar o clima pelo nome da cidade.
+- [x] Exibir temperatura, condição climática e ícone correspondente.
+- [x] Interface dinâmica que diferencia Dia e Noite.
+- [x] Persistência da última cidade buscada via `localStorage`
